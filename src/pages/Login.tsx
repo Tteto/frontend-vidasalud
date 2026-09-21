@@ -7,7 +7,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const result = await instance.loginPopup(loginRequest);
+    const result = await instance.loginRedirect(loginRequest);
     // Fija la cuenta activa: sin esto, acquireTokenSilent no sabe para
     // qué cuenta pedir el token si hay más de una sesión en el navegador.
     instance.setActiveAccount(result.account);
