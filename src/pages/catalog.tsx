@@ -24,13 +24,14 @@ export default function Catalog() {
       .finally(() => setCargando(false));
   }, []);
 
-  if (cargando) return <p>Cargando catálogo...</p>;
+  if (cargando) return <div className="loading-state"><span className="state-icon">↻</span><p>Cargando catálogo...</p></div>;
 
   return (
-    <div>
-      <h2>Catálogo de Prestaciones</h2>
-      {error && <p className="error">{error}</p>}
-      <table>
+    <div className="portal-page">
+      <header className="portal-page-header"><div><p className="eyebrow">Administración</p><h1>Catálogo</h1><p>Gestiona las prestaciones y la disponibilidad de tu red.</p></div><span className="portal-count">{prestaciones.length} servicios</span></header>
+      {error && <div className="error-state inline-error"><span className="state-icon">!</span><p>{error}</p></div>}
+      {!error && prestaciones.length === 0 && <div className="data-card empty-state"><span className="state-icon">+</span><h2>Catálogo vacío</h2><p>Aún no hay prestaciones disponibles.</p></div>}
+      {prestaciones.length > 0 && <div className="data-card table-wrap"><table className="data-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -45,13 +46,13 @@ export default function Catalog() {
             <tr key={p.id}>
               <td>{p.id}</td>
               <td>{p.nombre}</td>
-              <td>${p.precio}</td>
+              <td>${p.precio.toLocaleString("es-CL")}</td>
               <td>{p.boxId}</td>
               <td>{p.cuposDisponibles}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></div>}
     </div>
   );
 }

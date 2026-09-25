@@ -6,6 +6,7 @@ import App from "./App";
 import { msalConfig } from "./auth/authConfig";
 import { registerApiInterceptor } from "./auth/apiClient";
 import "./index.css";
+import "./App.css";
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
